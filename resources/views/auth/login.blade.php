@@ -1,50 +1,40 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <x-jet-validation-errors class="mb-4" />
-
+    <div
+        class="animate-pulse min-h-screen bg-slate-200 py-6 flex flex-col justify-center relative overflow-hidden sm:py-12">
+        <span
+            class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Sign
+            in Form</span>
         @if (session('status'))
         <div class="mb-4 font-medium text-sm text-green-600">
             {{ session('status') }}
         </div>
         @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                    required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
+        <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <label for="" class="block">Username or Email</label>
+                <input name="email" type="Email" class="border w-full h-10 px-3 mb-5 rounded-md"
+                    placeholder="Username or Email">
+                <label for="" class="block">Password</label>
+                <input name="password" type="password" class="border w-full h-10 px-3 mb-5 rounded-md"
+                    placeholder="password">
+                <div class="flex items-start">
+                    <div class="flex items-start">
+                        <div class="flex items-center">
+                            <input id="remember" aria-describedby="remember" type="checkbox"
+                                class="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                                required="">
+                        </div>
+                        <div class="text-sm ml-3">
+                            <label for="remember" class="font-medium text-gray-900">Remember me</label>
+                        </div>
+                    </div>
+                    <a href="#" class="text-sm text-blue-700 hover:underline ml-auto dark:text-blue-500">Lost
+                        Password?</a>
+                </div>
+                <button
+                    class="mt-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-14 py-3 rounded">Login</button>
+            </form>
+        </div>
+    </div>
 </x-guest-layout>
